@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual - Derecho Fiscal</title>
+    <style>
+        /* --- ESTILOS GENERALES Y TEMÁTICOS --- */
+        :root {
+            --primary-color: #1e3d2f; /* Verde Fiscal Oscuro */
+            --secondary-color: #d4af37; /* Dorado Justicia */
+            --bg-color: #fcfbf4; /* Crema Papel */
+            --text-color: #333;
+            --line-color: #8c8c8c;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif; /* Tipografía estilo legal */
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+
+        /* --- ESTRUCTURA DEL ÁRBOL (MAPA CONCEPTUAL) --- */
+        .tree {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alineación superior */
+            padding-top: 20px;
+            overflow-x: auto; /* Scroll si es muy ancho */
+            width: 100%;
+        }
+
+        .tree ul {
+            padding-top: 20px; 
+            position: relative;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tree li {
+            float: left; text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+        }
+
+        /* LÍNEAS CONECTORAS */
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute; top: 0; right: 50%;
+            border-top: 2px solid var(--line-color);
+            width: 50%; height: 20px;
+        }
+        .tree li::after {
+            right: auto; left: 50%;
+            border-left: 2px solid var(--line-color);
+        }
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+        .tree li:only-child { padding-top: 0; }
+        .tree li:first-child::before, .tree li:last-child::after {
+            border: 0 none;
+        }
+        .tree li:last-child::before{
+            border-right: 2px solid var(--line-color);
+            border-radius: 0 5px 0 0;
+        }
+        .tree li:first-child::after{
+            border-radius: 5px 0 0 0;
+        }
+        .tree ul ul::before{
+            content: '';
+            position: absolute; top: 0; left: 50%;
+            border-left: 2px solid var(--line-color);
+            width: 0; height: 20px;
+        }
+
+        /* --- CAJAS DE CONTENIDO --- */
+        .tree li div.node {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 15px;
+            display: inline-block;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            max-width: 180px;
+            position: relative;
+        }
+
+        .tree li div.node:hover {
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 0px var(--secondary-color);
+        }
+
+        /* Estilos específicos por niveles */
+        .root-node {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            font-weight: bold;
+            font-size: 1.2rem;
+            max-width: 250px !important;
+            border-color: var(--secondary-color) !important;
+        }
+
+        .level-1 {
+            background-color: #e8f5e9 !important; /* Verde muy claro */
+            font-weight: bold;
+        }
+
+        .level-2 {
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* --- FOOTER BIBLIOGRAFÍA --- */
+        .footer-resources {
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid var(--line-color);
+            width: 80%;
+            text-align: left;
+            background: #fff;
+            border-left: 5px solid var(--secondary-color);
+        }
+        .footer-resources h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tree ul {
+                flex-direction: column; /* Cambiar a vertical en móviles */
+                align-items: center;
+            }
+            .tree li {
+                padding: 10px 0;
+                width: 100%;
+            }
+            /* Ocultar líneas complejas en móvil para simplificar */
+            .tree li::before, .tree li::after, .tree ul ul::before {
+                border: none; 
+            }
+            .tree li div.node {
+                margin-bottom: 10px;
+                width: 80%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Técnica Legislativa en Materia Fiscal</h1>
+
+    <div class="tree">
+        <ul>
+            <li>
+                <div class="node root-node">Análisis e Interpretación del Derecho Fiscal</div>
+                
+                <ul>
+                    <li>
+                        <div class="node level-1">Derecho Fiscal Mexicano</div>
+                        <ul>
+                            <li>
+                                <div class="node level-2">Ubicación en el Sistema Fiscal Mexicano</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="node level-1">Relación con otras ramas</div>
+                        <ul>
+                            <li>
+                                <div class="node level-2">Comparación con otras áreas del Derecho</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="node level-1">Fuentes del Derecho</div>
+                        <ul>
+                            <li>
+                                <div class="node level-2">Identificación de fuentes formales y materiales</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="node level-1">Principios de las Contribuciones</div>
+                        <ul>
+                            <li>
+                                <div class="node level-2">Principios Jurídicos (Legalidad, Equidad)</div>
+                            </li>
+                            <li>
+                                <div class="node level-2">Principios Doctrinales</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="node level-1">Métodos de Interpretación</div>
+                        <ul>
+                            <li>
+                                <div class="node level-2">Aplicación a disposiciones fiscales</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer-resources">
+        <h3>Recursos y Bibliografía</h3>
+        <ul>
+            <li><strong>Fernández Martínez, Refugio de Jesús (2011):</strong> Guía Didáctica de Derecho Fiscal. Ed. Jasfer (2ª Edición).</li>
+            <li><strong>Código Fiscal de la Federación:</strong> Texto vigente (Cámara de Diputados).</li>
+            <li>Plataforma Teams y Material de Investigación Documental.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
