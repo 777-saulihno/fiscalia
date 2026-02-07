@@ -3,51 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Conceptual - Derecho Fiscal</title>
+    <title>Mapa Conceptual Premium - Técnica Legislativa Fiscal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ESTILOS GENERALES Y TEMÁTICOS --- */
+        /* --- 1. TIPOGRAFÍA Y COLORES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
         :root {
-            --primary-color: #1e3d2f; /* Verde Fiscal Oscuro */
-            --secondary-color: #d4af37; /* Dorado Justicia */
-            --bg-color: #fcfbf4; /* Crema Papel */
-            --text-color: #333;
-            --line-color: #8c8c8c;
+            --primary-fiscal: #0A2F1F; /* Verde oscuro profundo */
+            --accent-gold: #D4AF37;    /* Dorado metálico */
+            --accent-gold-light: #F4E3A5;
+            --bg-parchment: #FDFBF7;   /* Color pergamino */
+            --text-dark: #2c2c2c;
+            --wax-red: #8B0000;        /* Rojo para "sellos" */
         }
 
         body {
-            font-family: 'Times New Roman', serif; /* Tipografía estilo legal */
-            background-color: var(--bg-color);
+            font-family: 'Merriweather', serif;
+            background-color: var(--bg-parchment);
+            /* Fondo con textura de papel y una sutil balanza de justicia */
+            background-image: 
+                radial-gradient(circle at center, transparent 0%, var(--bg-parchment) 70%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 C 45 20, 55 20, 50 30 M30 40 L70 40 M30 40 L20 60 L40 60 L30 40 M70 40 L60 60 L80 60 L70 40 M50 30 L50 80' stroke='%23e0e0e0' stroke-width='1' fill='none' opacity='0.3'/%3E%3C/svg%3E");
             margin: 0;
-            padding: 20px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
-            background-size: 20px 20px;
+            min-height: 100vh;
         }
 
-        h1 {
-            color: var(--primary-color);
+        h1.main-title {
+            font-family: 'Cinzel Decorative', cursive;
+            color: var(--primary-fiscal);
+            font-size: 2.5rem;
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.3);
+            border-bottom: 4px double var(--accent-gold);
+            padding-bottom: 15px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        h1.main-title::after {
+            content: '⚖️';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background: var(--bg-parchment);
+            padding: 0 10px;
         }
 
-        /* --- ESTRUCTURA DEL ÁRBOL (MAPA CONCEPTUAL) --- */
+        /* --- 2. ESTRUCTURA DEL ÁRBOL (ÁRBITRO) --- */
         .tree {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alineación superior */
             padding-top: 20px;
-            overflow-x: auto; /* Scroll si es muy ancho */
             width: 100%;
+            overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+            padding-bottom: 50px; /* Espacio para la sombra de hover */
         }
 
         .tree ul {
-            padding-top: 20px; 
+            padding-top: 40px; 
             position: relative;
             transition: all 0.5s;
             display: flex;
@@ -58,20 +77,21 @@
             float: left; text-align: center;
             list-style-type: none;
             position: relative;
-            padding: 20px 5px 0 5px;
+            padding: 40px 15px 0 15px; /* Más espacio entre nodos */
             transition: all 0.5s;
         }
 
-        /* LÍNEAS CONECTORAS */
+        /* LÍNEAS CONECTORAS DORADAS */
         .tree li::before, .tree li::after {
             content: '';
             position: absolute; top: 0; right: 50%;
-            border-top: 2px solid var(--line-color);
-            width: 50%; height: 20px;
+            border-top: 3px solid var(--accent-gold);
+            width: 50%; height: 40px;
+            box-shadow: 0 2px 2px rgba(0,0,0,0.1); /* Sombra sutil a las líneas */
         }
         .tree li::after {
             right: auto; left: 50%;
-            border-left: 2px solid var(--line-color);
+            border-left: 3px solid var(--accent-gold);
         }
         .tree li:only-child::after, .tree li:only-child::before {
             display: none;
@@ -81,164 +101,247 @@
             border: 0 none;
         }
         .tree li:last-child::before{
-            border-right: 2px solid var(--line-color);
-            border-radius: 0 5px 0 0;
+            border-right: 3px solid var(--accent-gold);
+            border-radius: 0 15px 0 0;
         }
         .tree li:first-child::after{
-            border-radius: 5px 0 0 0;
+            border-radius: 15px 0 0 0;
         }
         .tree ul ul::before{
             content: '';
             position: absolute; top: 0; left: 50%;
-            border-left: 2px solid var(--line-color);
-            width: 0; height: 20px;
+            border-left: 4px double var(--accent-gold); /* Línea central doble */
+            width: 0; height: 40px;
         }
 
-        /* --- CAJAS DE CONTENIDO --- */
-        .tree li div.node {
-            background: white;
-            border: 2px solid var(--primary-color);
-            color: var(--text-color);
-            padding: 15px;
+        /* --- 3. DISEÑO DE LOS NODOS (PERGAMINOS) --- */
+        .tree li .node-container {
             display: inline-block;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-            max-width: 180px;
-            position: relative;
+            perspective: 1000px;
+            z-index: 10;
         }
 
-        .tree li div.node:hover {
-            transform: translateY(-5px);
-            box-shadow: 6px 6px 0px var(--secondary-color);
-        }
-
-        /* Estilos específicos por niveles */
-        .root-node {
-            background-color: var(--primary-color) !important;
-            color: white !important;
-            font-weight: bold;
-            font-size: 1.2rem;
-            max-width: 250px !important;
-            border-color: var(--secondary-color) !important;
-        }
-
-        .level-1 {
-            background-color: #e8f5e9 !important; /* Verde muy claro */
-            font-weight: bold;
-        }
-
-        .level-2 {
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        /* --- FOOTER BIBLIOGRAFÍA --- */
-        .footer-resources {
-            margin-top: 50px;
+        .node {
+            background: linear-gradient(145deg, #ffffff, #f0f0e0);
+            border: 2px solid var(--primary-fiscal);
+            border-top: 4px solid var(--accent-gold);
+            color: var(--text-dark);
             padding: 20px;
-            border-top: 1px solid var(--line-color);
-            width: 80%;
-            text-align: left;
-            background: #fff;
-            border-left: 5px solid var(--secondary-color);
-        }
-        .footer-resources h3 {
-            margin-top: 0;
-            color: var(--primary-color);
+            border-radius: 8px 8px 20px 8px; /* Esquina doblada */
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación elástica */
+            box-shadow: 
+                0 10px 20px -10px rgba(10, 47, 31, 0.5),
+                inset 0 0 20px rgba(212, 175, 55, 0.1);
+            max-width: 220px;
+            min-height: 180px; /* Altura mínima para uniformidad */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out forwards; /* Animación de entrada */
+            opacity: 0; /* Empieza invisible para la animación */
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .tree ul {
-                flex-direction: column; /* Cambiar a vertical en móviles */
-                align-items: center;
+        /* Sello de lacre falso */
+        .node::before {
+            content: '§'; /* Símbolo de sección */
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--wax-red);
+            color: gold;
+            font-family: 'Cinzel Decorative';
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .node:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 
+                0 15px 30px -10px rgba(212, 175, 55, 0.6),
+                0 0 15px var(--accent-gold-light);
+            border-color: var(--accent-gold);
+            z-index: 100;
+        }
+
+        .node h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem;
+            color: var(--primary-fiscal);
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(10, 47, 31, 0.2);
+            padding-bottom: 8px;
+        }
+        
+        .node h2 i {
+            color: var(--accent-gold);
+            margin-right: 8px;
+        }
+
+        .node p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+            margin: 0;
+            color: #444;
+        }
+
+        /* Estilo especial para el nodo raíz */
+        .root-node {
+            background: linear-gradient(135deg, var(--primary-fiscal), #1e3d2f) !important;
+            color: var(--accent-gold-light) !important;
+            max-width: 280px !important;
+            border: 3px solid var(--accent-gold) !important;
+        }
+        .root-node h2 { color: var(--accent-gold-light) !important; border-bottom-color: rgba(212, 175, 55, 0.3); }
+        .root-node p { color: #e0e0e0 !important; }
+        .root-node::before { background-color: var(--accent-gold); color: var(--primary-fiscal); content: '🏛️'; font-size: 1rem;}
+
+        /* --- 4. ANIMACIONES KEYFRAMES --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            .tree li {
-                padding: 10px 0;
-                width: 100%;
-            }
-            /* Ocultar líneas complejas en móvil para simplificar */
-            .tree li::before, .tree li::after, .tree ul ul::before {
-                border: none; 
-            }
-            .tree li div.node {
-                margin-bottom: 10px;
-                width: 80%;
-                max-width: none;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        /* Retrasos en la animación para efecto cascada */
+        .tree li:nth-child(1) .node { animation-delay: 0.2s; }
+        .tree li:nth-child(2) .node { animation-delay: 0.4s; }
+        .tree li:nth-child(3) .node { animation-delay: 0.6s; }
+        .tree li:nth-child(4) .node { animation-delay: 0.8s; }
+        .tree li:nth-child(5) .node { animation-delay: 1.0s; }
+
+
+        /* --- 5. FOOTER BIBLIOGRAFÍA --- */
+        .footer-ledger {
+            margin-top: 80px;
+            background: #fff;
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            border: 1px solid #d0d0d0;
+            box-shadow: 
+                inset 0 0 30px rgba(0,0,0,0.05),
+                10px 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            /* Efecto de libro abierto */
+            background-image: linear-gradient(90deg, rgba(0,0,0,0.05) 49.9%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.05) 50.1%);
+        }
+        .footer-ledger::before {
+            content: '';
+            position: absolute; top:0; bottom:0; left: 50%; width: 2px; background: #e0e0e0;
+        }
+        .footer-ledger h3 {
+            font-family: 'Cinzel Decorative';
+            color: var(--primary-fiscal);
+            text-align: center;
+            margin-top: 0;
+        }
+        .footer-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .footer-content li {
+            margin-bottom: 10px;
+        }
+        .footer-content i {
+            color: var(--accent-gold);
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>Técnica Legislativa en Materia Fiscal</h1>
+    <h1 class="main-title">Técnica Legislativa en Materia Fiscal Mexicana</h1>
 
     <div class="tree">
         <ul>
             <li>
-                <div class="node root-node">Análisis e Interpretación del Derecho Fiscal</div>
+                <div class="node-container">
+                    <div class="node root-node">
+                        <h2><i class="fas fa-gavel"></i> Análisis Fundamental</h2>
+                        <p>Análisis estructurado del derecho fiscal mexicano, utilizando la técnica legislativa y métodos de interpretación para la aplicación profesional de principios jurídicos.</p>
+                    </div>
+                </div>
                 
                 <ul>
                     <li>
-                        <div class="node level-1">Derecho Fiscal Mexicano</div>
-                        <ul>
-                            <li>
-                                <div class="node level-2">Ubicación en el Sistema Fiscal Mexicano</div>
-                            </li>
-                        </ul>
+                        <div class="node-container">
+                            <div class="node">
+                                <h2><i class="fas fa-map-marked-alt"></i> Ubicación Sistémica</h2>
+                                <p><strong>Concepto:</strong> Posición del Derecho Fiscal dentro del gran Sistema Jurídico Mexicano.</p>
+                                <p style="margin-top: 10px; font-style: italic; font-size: 0.8rem;"><strong>Actividad:</strong> Lectura activa para situar las normas tributarias en el contexto nacional.</p>
+                            </div>
+                        </div>
                     </li>
 
                     <li>
-                        <div class="node level-1">Relación con otras ramas</div>
-                        <ul>
-                            <li>
-                                <div class="node level-2">Comparación con otras áreas del Derecho</div>
-                            </li>
-                        </ul>
+                        <div class="node-container">
+                            <div class="node">
+                                <h2><i class="fas fa-project-diagram"></i> Relaciones Interdisciplinarias</h2>
+                                <p><strong>Concepto:</strong> Vínculos y autonomía relativa con otras ramas (Constitucional, Administrativo, Penal).</p>
+                                <p style="margin-top: 10px; font-style: italic; font-size: 0.8rem;"><strong>Actividad:</strong> Análisis comparativo de cómo interactúan las distintas áreas legales.</p>
+                            </div>
+                        </div>
                     </li>
 
                     <li>
-                        <div class="node level-1">Fuentes del Derecho</div>
-                        <ul>
-                            <li>
-                                <div class="node level-2">Identificación de fuentes formales y materiales</div>
-                            </li>
-                        </ul>
+                        <div class="node-container">
+                            <div class="node">
+                                <h2><i class="fas fa-book-law"></i> Fuentes del Derecho Fiscal</h2>
+                                <p><strong>Concepto:</strong> Origen de las obligaciones tributarias: Ley (CFF), Tratados, Jurisprudencia y Doctrina.</p>
+                                <p style="margin-top: 10px; font-style: italic; font-size: 0.8rem;"><strong>Actividad:</strong> Investigación documental para identificar las distintas fuentes vigentes.</p>
+                            </div>
+                        </div>
                     </li>
 
                     <li>
-                        <div class="node level-1">Principios de las Contribuciones</div>
-                        <ul>
-                            <li>
-                                <div class="node level-2">Principios Jurídicos (Legalidad, Equidad)</div>
-                            </li>
-                            <li>
-                                <div class="node level-2">Principios Doctrinales</div>
-                            </li>
-                        </ul>
+                        <div class="node-container">
+                            <div class="node">
+                                <h2><i class="fas fa-balance-scale"></i> Principios de las Contribuciones</h2>
+                                <p><strong>Jurídicos:</strong> Legalidad, Equidad, Proporcionalidad.</p>
+                                <p><strong>Doctrinales:</strong> Justicia, Certidumbre, Comodidad y Economía.</p>
+                                <p style="margin-top: 10px; font-style: italic; font-size: 0.8rem;"><strong>Actividad:</strong> Presentación en equipo sobre la aplicación de estos pilares.</p>
+                            </div>
+                        </div>
                     </li>
 
                     <li>
-                        <div class="node level-1">Métodos de Interpretación</div>
-                        <ul>
-                            <li>
-                                <div class="node level-2">Aplicación a disposiciones fiscales</div>
-                            </li>
-                        </ul>
+                        <div class="node-container">
+                            <div class="node">
+                                <h2><i class="fas fa-search"></i> Métodos de Interpretación</h2>
+                                <p><strong>Concepto:</strong> Herramientas hermenéuticas para desentrañar el sentido de la norma fiscal (Estricto, Teleológico, Sistemático).</p>
+                                <p style="margin-top: 10px; font-style: italic; font-size: 0.8rem;"><strong>Actividad:</strong> Aplicación práctica a disposiciones fiscales específicas.</p>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
 
-    <div class="footer-resources">
-        <h3>Recursos y Bibliografía</h3>
-        <ul>
-            <li><strong>Fernández Martínez, Refugio de Jesús (2011):</strong> Guía Didáctica de Derecho Fiscal. Ed. Jasfer (2ª Edición).</li>
-            <li><strong>Código Fiscal de la Federación:</strong> Texto vigente (Cámara de Diputados).</li>
-            <li>Plataforma Teams y Material de Investigación Documental.</li>
+    <div class="footer-ledger">
+        <h3><i class="fas fa-scroll"></i> Recursos y Fundamento Legal</h3>
+        <ul class="footer-content" style="list-style: none; padding-left: 0;">
+            <li><i class="fas fa-book"></i> <strong>Doctrina:</strong> Fernández Martínez, R. J. (2011). <em>Guía Didáctica de Derecho Fiscal</em>. 2ª Ed. Jasfer, Monterrey.</li>
+            <li><i class="fas fa-landmark"></i> <strong>Legislación Vigente:</strong> Código Fiscal de la Federación (CFF). Disponible en el portal de la H. Cámara de Diputados.</li>
+            <li><i class="fas fa-laptop"></i> <strong>Herramientas:</strong> Plataforma Teams y recursos de investigación documental digital.</li>
         </ul>
     </div>
 
